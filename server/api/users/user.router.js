@@ -25,18 +25,11 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-  User.findById(req.body.author_id)
+  User.create(req.body)
   .then(function (user) {
-    if (!user.isAdmin){
-      res.status(404).end();
-    } else {
-      User.create(req.body)
-      .then(function (user) {
-        res.status(201).json(user);
-      })
-      .catch(next);
-    }
+    res.status(201).json(user);
   })
+  .catch(next);
 });
 
 router.get('/:id', function (req, res, next) {
