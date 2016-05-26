@@ -1,6 +1,6 @@
 'use strict';
 
-app.factory('Story', function ($http) {
+app.factory('Story', function ($http, $rootScope) {
   function Story (props) {
     angular.extend(this, props);
   }
@@ -22,6 +22,8 @@ app.factory('Story', function ($http) {
     });
   };
 
+  this.currentUser = $rootScope.isMe;
+  console.log(this.currentUser);
   Story.fetchAll = function () {
     return $http.get(Story.url)
     .then(function (res) {
